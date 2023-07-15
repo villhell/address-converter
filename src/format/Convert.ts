@@ -24,10 +24,12 @@ export class Convert {
    * @returns {number} The decoded byte.
    */
   public static toByte = (char1: string, char2: string): number => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const byte = utilities.tryParseByte(char1, char2);
     if (undefined === byte) {
       throw Error(`unrecognized hex char, char1:${char1}, char2:${char2}`);
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return byte;
   };
 
@@ -110,7 +112,7 @@ export class Convert {
    * @param {Uint8Array} input A uint8 array.
    * @returns {string} A hex encoded string corresponding to the input.
    */
-  public static uint8ToHex = (input): string => {
+  public static uint8ToHex = (input: Uint8Array): string => {
     let s = '';
     for (const byte of input) {
       s += utilities.Nibble_To_Char_Map[byte >> 4];
@@ -125,7 +127,7 @@ export class Convert {
    * @param {Uint8Array} input A uint8 array.
    * @returns {Uint32Array} A uint32 array created from the input.
    */
-  public static uint8ToUint32 = (input): Uint32Array =>
+  public static uint8ToUint32 = (input: Uint8Array): Uint32Array =>
     new Uint32Array(input.buffer);
 
   /**
@@ -165,6 +167,7 @@ export class Convert {
    * @return {string}
    */
   public static utf8ToHex = (input: string): string => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     return Buffer.from(input, 'utf-8').toString('hex').toUpperCase();
   };
 
@@ -200,6 +203,7 @@ export class Convert {
       str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
     }
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
       return decode(str);
     } catch (e) {
       return str;

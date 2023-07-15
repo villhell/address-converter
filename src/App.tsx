@@ -41,10 +41,7 @@ function App() {
   };
 
   // SnackbarのonCloseハンドラー
-  const handleSnackbarClose = (
-    event: React.SyntheticEvent | Event,
-    reason: SnackbarCloseReason
-  ) => {
+  const handleSnackbarClose = (reason: SnackbarCloseReason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -52,7 +49,7 @@ function App() {
   };
 
   // AlertのonCloseハンドラー
-  const handleAlertClose = (event: React.SyntheticEvent) => {
+  const handleAlertClose = () => {
     setOpen(false);
   };
 
@@ -108,7 +105,7 @@ function App() {
       <Snackbar
         open={open}
         autoHideDuration={6000}
-        onClose={handleSnackbarClose}
+        onClose={(_, reason) => handleSnackbarClose(reason)}
       >
         <Alert
           onClose={handleAlertClose}
